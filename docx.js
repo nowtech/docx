@@ -17,8 +17,19 @@ docx.on('error', function(err) {
 })
 
 // First page
+let pObj = docx.createP()
 
-// Table POC  - Dennis !!!!
+
+
+pObj.addText('Lorem ipsum dolor sit amet, consectetur adipiscing elit. Aenean molestie vitae dolor in semper. Aenean vulputate eu arcu id tincidunt. Quisque efficitur imperdiet consectetur. Nulla viverra dolor nulla, sit amet sodales mauris ultrices et. Nunc efficitur at augue lacinia vulputate. Cras laoreet magna leo, sed tincidunt risus consequat a. Sed sit amet nunc augue. Proin porta neque purus, at pretium est sollicitudin cursus.')
+
+
+pObj = docx.createP()
+
+pObj.addText('This is a paragraph with a background color and a text color added. Maecenas eget nibh felis. Phasellus ullamcorper nec tortor sit amet bibendum. Pellentesque fringilla tellus id pulvinar pretium. Donec nisl mi, accumsan vitae gravida quis, ultrices ut erat. Aenean mollis, libero a euismod sollicitudin, lacus sem malesuada tellus, ac consectetur nibh felis non nulla. Ut sit amet posuere augue, eu viverra nibh. Ut aliquet risus a iaculis placerat. Phasellus vel semper mauris. After this paragraph there will be a page break.', { color: '00ffff', back: '000088' })
+
+//Pagebreak,jumps to next page
+docx.putPageBreak()
 
 // table
 const table = [
@@ -35,30 +46,20 @@ const table = [
             shd: {
                 fill: "7F7F7F",
                 themeFill: "text1",
-                "themeFillTint": "80"
+                themeFillTint: "80"
             },
             fontFamily: "Avenir Book"
         }
     },{
         val: "Title1",
         opts: {
+          //  cellColWidth not adjusting here
+          // Text in this column still adjusting vertical....
+            cellColWidth: 4261,
             b:true,
+            sz: "48",
             color: "A00000",
-            align: "right",
-            shd: {
-                fill: "92CDDC",
-                themeFill: "text1",
-                "themeFillTint": "80"
-            }
-        }
-    },{
-        val: "Title2",
-        opts: {
-            align: "center",
-            vAlign: "center",
-            cellColWidth: 42,
-            b:true,
-            sz: '48',
+            // align: "right",
             shd: {
                 fill: "92CDDC",
                 themeFill: "text1",
@@ -66,17 +67,12 @@ const table = [
             }
         }
     }],
-    [1,'All grown-ups were once children',''],
-    [2,'there is no harm in putting off a piece of work until another day.',''],
-    [3,'But when it is a matter of baobabs, that always means a catastrophe.',''],
-    [4,'You can include CR-LF inline\r\nfor multiple lines.',''],
-    [5,['Or you can provide lines within', 'a cell in an array'],''],
-    [6,'But when it is a matter of baobabs, that always means a catastrophe.',''],
-    [7,'watch out for the baobabs!','END'],
+    [1,'All grown-ups were once children'],
+    [2,'there is no harm in putting off a piece of work until another day.']
 ]
 
 const tableStyle = {
-    tableColWidth: 4261,
+    tableColWidth: 8261,
     tableSize: 24,
     tableColor: "ada",
     tableAlign: "left",
@@ -95,7 +91,7 @@ docx.createTable (table, tableStyle);
 docx.putPageBreak()
 
 // Create a new paragraph:
-let pObj = docx.createP()
+pObj = docx.createP()
 
 pObj.addText('Simple')
 pObj.addText(' with color', { color: '000088' })
